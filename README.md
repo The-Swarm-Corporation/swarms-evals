@@ -30,7 +30,7 @@ Please cite Swarms in your paper or your project if you found it beneficial in a
 ```
 
 # Evals
-- [GSM8K](https://huggingface.co/datasets/openai/gsm8k)
+- [x] [GSM8K](https://huggingface.co/datasets/openai/gsm8k)
 - ARC (AI2 Reasoning Challenge)
 - HellaSwag
 - Multiverse Math
