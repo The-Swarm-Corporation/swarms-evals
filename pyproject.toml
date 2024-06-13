@@ -26,6 +26,7 @@ python = "^3.10"
 swarms = "*"
 pydantic = "*"
 fastapi = "*"
+tiktoken = "*"
 
 [tool.poetry.group.lint.dependencies]
 ruff = "^0.4.8"
