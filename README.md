@@ -11,7 +11,6 @@ $ pip3 install swarms-eval
 
 
 
-## Usage E
 
 # License
 MIT

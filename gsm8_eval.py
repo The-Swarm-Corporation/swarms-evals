@@ -1,3 +1,4 @@
+import os
 import re
 import time
 
@@ -46,7 +47,7 @@ def load_gsm8k_dataset():
 
 # Tokenizer for counting tokens
 def count_tokens(text: str = None):
-    tokenizer = tiktoken.encoding_for_model("gpt-4")
+    tokenizer = tiktoken.encoding_for_model("gpt-4o")
     return len(tokenizer.encode(text))
 
 
@@ -70,12 +71,7 @@ def evaluate_model_on_gsm8k(agent: Agent, test_data):
         latency = end_time - start_time
         total_time += latency
 
-        # Check if predicted_answer is None before normalizing
-        if predicted_answer is not None:
-            predicted_answer = normalize_answer(predicted_answer)
-        else:
-            print("Predicted answer is None")
-            continue  # Skip this iteration and move to the next one
+        predicted_answer = normalize_answer(predicted_answer)
 
         # Count tokens
         tokens = count_tokens(question + predicted_answer)
@@ -108,7 +104,7 @@ agent = Agent(
     agent_name="GsM8K-Agent",
     system_prompt=GSM8K_PROMPT,
     llm=OpenAIChat(
-        openai_api_key="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",
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
     ),
     max_loops=1,
     autosave=True,
