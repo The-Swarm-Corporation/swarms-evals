@@ -1,3 +1,4 @@
+import os
 import re
 import time
 
@@ -6,6 +7,10 @@ from datasets import load_dataset
 from loguru import logger
 from swarms import Agent, OpenAIChat
 from swarms_eval.gsm8k_system import GSM8K_PROMPT
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Initialize logger
 logger.add(
@@ -97,7 +102,7 @@ agent = Agent(
     agent_name="GsM8K-Agent",
     agent_description=GSM8K_PROMPT,
     llm=OpenAIChat(
-        openai_api_key="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", 
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
     ),
     max_loops=1,
     autosave=True,
