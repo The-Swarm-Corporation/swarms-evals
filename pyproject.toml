@@ -27,6 +27,7 @@ swarms = "*"
 pydantic = "*"
 fastapi = "*"
 tiktoken = "*"
+datasets = "*"
 
 [tool.poetry.group.lint.dependencies]
 ruff = "^0.4.8"
