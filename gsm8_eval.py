@@ -5,12 +5,12 @@ import tiktoken
 from datasets import load_dataset
 from loguru import logger
 from swarms import Agent, OpenAIChat
+from swarms_eval.gsm8k_system import GSM8K_PROMPT
 
 # Initialize logger
 logger.add(
     "metrics.log", format="{time} {level} {message}", level="INFO"
 )
-
 
 # Normalization function
 def normalize_answer(s):
@@ -40,13 +40,13 @@ def load_gsm8k_dataset():
 
 
 # Tokenizer for counting tokens
-def count_tokens(text):
-    tokenizer = tiktoken.get_encoding("gpt2")
+def count_tokens(text: str = None):
+    tokenizer = tiktoken.encoding_for_model("gpt-4o")
     return len(tokenizer.encode(text))
 
 
 # Evaluate model on GSM8K
-def evaluate_model_on_gsm8k(agent, test_data):
+def evaluate_model_on_gsm8k(agent: Agent, test_data):
     correct = 0
     total = len(test_data)
     total_tokens = 0
@@ -92,15 +92,14 @@ def evaluate_model_on_gsm8k(agent, test_data):
 
     return accuracy, avg_latency, avg_tokens
 
-
-# Main function to setup and run the agent
-
 # Initialize the agent with ChromaDB memory
 agent = Agent(
-    agent_name="Covid-19-Chat",
-    agent_description="This agent provides information about COVID-19 symptoms.",
-    llm=OpenAIChat(),
-    max_loops="auto",
+    agent_name="GsM8K-Agent",
+    agent_description=GSM8K_PROMPT,
+    llm=OpenAIChat(
+        openai_api_key="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", 
+    ),
+    max_loops=1,
     autosave=True,
     verbose=True,
 )
