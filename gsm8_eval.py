@@ -6,7 +6,7 @@ import tiktoken
 from datasets import load_dataset
 from loguru import logger
 from swarms import Agent, OpenAIChat
-from swarms_eval.gsm8k_system import GSM8K_PROMPT
+from swarms_evals.gsm8k_system import GSM8K_PROMPT
 from dotenv import load_dotenv
 
 
@@ -16,6 +16,7 @@ load_dotenv()
 logger.add(
     "metrics.log", format="{time} {level} {message}", level="INFO"
 )
+
 
 # Normalization function
 def normalize_answer(s):
@@ -97,10 +98,11 @@ def evaluate_model_on_gsm8k(agent: Agent, test_data):
 
     return accuracy, avg_latency, avg_tokens
 
+
 # Initialize the agent with ChromaDB memory
 agent = Agent(
     agent_name="GsM8K-Agent",
-    agent_description=GSM8K_PROMPT,
+    system_prompt=GSM8K_PROMPT,
     llm=OpenAIChat(
         openai_api_key=os.getenv("OPENAI_API_KEY"),
     ),
