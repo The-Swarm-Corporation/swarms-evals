@@ -12,6 +12,10 @@
 
 [ ] Natural2Code
 
+[ ] MBPP (early)
+
+[ ] SWE-bench
+
 ## commonsense reasoning
 [ ] ARC (AI2 Reasoning Challenge)
 
@@ -27,7 +31,7 @@
 
 [ ] CommonsenseQA
 
-## world knowledge
+## Question Answering - world knowledge
 [ ] WebQuestions
 
 [ ] NaturalQuestions
@@ -37,13 +41,22 @@
 [ ] ComplexWebQuestions
 
 [ ] WebQuestionsSP
+
 [ ] SearchQA
+
 [ ] HotpotQA
+
 [ ] DROP
+
 [ ] WikiHop
+
 [ ] QAngaroo
-[ ] BoolQ
+
 [ ] Multi
+
+[ ] GLUE (early)
+
+[ ] SuperGLUE
 
 ## reading comprehension
 
@@ -62,6 +75,14 @@
 [ ] BBH
 
 [ ] AGI Eval 
+
+## multi-agent
+
+[ ] ChatBot Arena
+
+[ ] MT Bench
+
+
 
 # Metrics
 
@@ -89,9 +110,12 @@
 [ ] Number of trials to acceptable performance
 [ ] Number of trials to best performance
 
+# References
 
 [1]Functional Benchmarks for Robust Evaluation of Reasoning Performance, and the Reasoning Gap (https://arxiv.org/html/2402.19450v1) Code (https://github.com/consequentai/fneval/)
 
 [2]explanation of metrics (https://gorilla.cs.berkeley.edu/blogs/8_berkeley_function_calling_leaderboard.html)
 
 [3] tool use benchmarks (https://langchain-ai.github.io/langchain-benchmarks/notebooks/tool_usage/intro.html?ref=blog.langchain.dev) (https://blog.langchain.dev/benchmarking-agent-tool-use/)
+
+[4] Blog on evaluating LLM apps (https://humanloop.com/blog/evaluating-llm-apps)
