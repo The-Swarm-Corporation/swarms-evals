@@ -66,13 +66,20 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # linear_formula: a string feature.
     # category: a string feature.
     for example in test_data:
-        question = example["question"]
+        # Use the passed fields if provided, otherwise default to None
+        problem = example.get("problem", problem)
+        rationale = example.get("rationale", rationale)
+        options = example.get("options", options)  # Assuming options is a list
+        correct_answer = example.get("correct", correct)
+        annotated_formula = example.get("annotated_formula", annotated_formula)
+        linear_formula = example.get("linear_formula", linear_formula)
+        category = example.get("category", category)
         answer = normalize_answer(example["answer"])
 
         start_time = time.time()
 
         # Run the agent on the question
-        predicted_answer = agent.run((question,))
+        predicted_answer = agent.run(problem,rationale, options)
 
         end_time = time.time()
         latency = end_time - start_time
@@ -81,16 +88,18 @@ def evaluate_model_on_math(agent: Agent, test_data):
         predicted_answer = normalize_answer(predicted_answer)
 
         # Count tokens
-        tokens = count_tokens(question + predicted_answer)
+        tokens = count_tokens(problem + rationale + options + predicted_answer)
         total_tokens += tokens
 
-        if predicted_answer == answer:
+        if predicted_answer == correct_answer:
             correct += 1
 
         # Log metrics
-        logger.info(f"Question: {question}")
+        logger.info(f"Problem: {problem}")
+        logger.info(f"Rationale: {rationale}")
+        logger.info(f"Options: {options}")
         logger.info(f"Predicted Answer: {predicted_answer}")
-        logger.info(f"Correct Answer: {answer}")
+        logger.info(f"Correct Answer: {correct_answer}")
         logger.info(f"Latency: {latency:.2f} seconds")
         logger.info(f"Tokens: {tokens}")
 
