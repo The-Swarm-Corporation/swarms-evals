@@ -67,13 +67,13 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # category: a string feature.
     for example in test_data:
         # Use the passed fields if provided, otherwise default to None
-        problem = example.get("problem", problem)
-        rationale = example.get("rationale", rationale)
-        options = example.get("options", options)  # Assuming options is a list
-        correct_answer = example.get("correct", correct)
-        annotated_formula = example.get("annotated_formula", annotated_formula)
-        linear_formula = example.get("linear_formula", linear_formula)
-        category = example.get("category", category)
+        problem = example.get("problem")
+        rationale = example.get("rationale")
+        options = example.get("options")  # Assuming options is a list
+        correct_answer = example.get("correct")
+        annotated_formula = example.get("annotated_formula")
+        linear_formula = example.get("linear_formula")
+        category = example.get("category")
         answer = normalize_answer(example["answer"])
 
         start_time = time.time()
