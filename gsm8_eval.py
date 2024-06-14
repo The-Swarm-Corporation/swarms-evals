@@ -100,11 +100,12 @@ def evaluate_model_on_gsm8k(agent: Agent, test_data):
 
 
 # Initialize the agent with ChromaDB memory
+
 agent = Agent(
     agent_name="GsM8K-Agent",
     system_prompt=GSM8K_PROMPT,
     llm=OpenAIChat(
-        openai_api_key=openai_api_key,
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
     ),
     max_loops=1,
     autosave=True,
