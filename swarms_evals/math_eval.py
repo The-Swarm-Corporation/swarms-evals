@@ -43,7 +43,8 @@ def normalize_answer(s):
 # Load MATH dataset
 def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
-    parsed_dataset = json.loads(dataset)
+    print(type(dataset))
+    parsed_dataset = json.loads(str(dataset))
     return parsed_dataset["test"]
 
 
