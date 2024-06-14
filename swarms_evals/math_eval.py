@@ -62,7 +62,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
     total = len(test_data)
     total_tokens = 0
     total_time = 0
-
+    print(test_data._info)
     # Problem: a string feature.
     # Rationale: a string feature.
     # options: a string feature.
