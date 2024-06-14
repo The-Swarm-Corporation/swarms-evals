@@ -41,7 +41,7 @@ def normalize_answer(s):
 
 # Load MATH dataset
 def load_math_dataset():
-    dataset = load_dataset("allenai/math_qa", "main")
+    dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
     return dataset["test"]
 
 
