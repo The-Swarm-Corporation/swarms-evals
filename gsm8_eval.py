@@ -100,11 +100,15 @@ def evaluate_model_on_gsm8k(agent: Agent, test_data):
 
 
 # Initialize the agent with ChromaDB memory
+if not openai_api_key:
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+elif not openai_api_key:
+    raise ValueError("OpenAI API Key is required")
 agent = Agent(
     agent_name="GsM8K-Agent",
     system_prompt=GSM8K_PROMPT,
     llm=OpenAIChat(
-        openai_api_key=os.getenv("OPENAI_API_KEY"),
+        openai_api_key=openai_api_key,
     ),
     max_loops=1,
     autosave=True,
