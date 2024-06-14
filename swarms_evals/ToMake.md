@@ -1,9 +1,9 @@
 # Evals to make
 
 ## Math
-[ ] GSM8K
+[x] GSM8K
 
-[ ] MATH
+[/] MATH
 
 ## code
 [ ] HumanEval
