@@ -6,7 +6,7 @@ import tiktoken
 from datasets import load_dataset
 from loguru import logger
 from swarms import Agent, OpenAIChat
-from swarms_evals.gsm8k_system import MATH_PROMPT
+from swarms_evals.math_system import MATH_PROMPT
 from dotenv import load_dotenv
 
 
