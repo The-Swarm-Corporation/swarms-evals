@@ -74,7 +74,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
         annotated_formula = example.get("annotated_formula")
         linear_formula = example.get("linear_formula")
         category = example.get("category")
-        answer = normalize_answer(example["answer"])
+        answer = normalize_answer(example["correct"])
 
         start_time = time.time()
 
