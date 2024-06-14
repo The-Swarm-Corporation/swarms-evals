@@ -1,6 +1,7 @@
 import os
 import re
 import time
+import json
 
 import tiktoken
 from datasets import load_dataset
@@ -42,7 +43,8 @@ def normalize_answer(s):
 # Load MATH dataset
 def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
-    return dataset["test"]
+    parsed_dataset = json.loads(dataset)
+    return parsed_dataset["test"]
 
 
 # Tokenizer for counting tokens
