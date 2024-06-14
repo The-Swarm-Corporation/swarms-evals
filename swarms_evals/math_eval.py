@@ -43,9 +43,11 @@ def normalize_answer(s):
 # Load MATH dataset
 def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
-    print(type(dataset))
-    parsed_dataset = json.loads(str(dataset))
-    return parsed_dataset["test"]
+    test_data = dataset["test"]
+    # Convert the DatasetDict to a list of dictionaries
+    # Each dictionary represents one example in the dataset
+    test_data_list = [example for example in test_data]
+    return test_data_list
 
 
 # Tokenizer for counting tokens
