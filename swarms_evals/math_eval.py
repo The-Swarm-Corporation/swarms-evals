@@ -44,8 +44,7 @@ def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
     test_data = dataset["test"]
     # Print the number of test examples
-    num_test_examples = len(test_data)
-    print(f"Number of test examples: {num_test_examples}")
+
     return test_data
 
 
@@ -68,7 +67,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # annotated_formula: a string feature.
     # linear_formula: a string feature.
     # category: a string feature.
-    for i in range(num_test_examples):
+    for i in range(total):
         question = questions[i]
         answer = answers[i]
         correct_option = correct[1]
