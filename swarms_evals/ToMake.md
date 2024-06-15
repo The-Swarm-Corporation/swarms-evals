@@ -68,7 +68,7 @@
 
 ## aggregated
 
-[ ] MMLU
+[/] MMLU
 
 [ ] HELM
 
