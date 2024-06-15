@@ -3,7 +3,7 @@
 ## Math
 [x] GSM8K
 
-[/] MATH
+[x] MATH
 
 ## code
 [ ] HumanEval
@@ -19,7 +19,7 @@
 ## commonsense reasoning
 [ ] ARC (AI2 Reasoning Challenge)
 
-[ ] HellaSwag
+[x] HellaSwag
 
 [ ] Winogrande
 
