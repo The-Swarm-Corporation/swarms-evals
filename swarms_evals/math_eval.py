@@ -67,6 +67,10 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # annotated_formula: a string feature.
     # linear_formula: a string feature.
     # category: a string feature.
+    # Extract the relevant fields from the test data
+    questions = test_data["Problem"]
+    answers = test_data["options"]
+    correct = test_data["correct"]
     for i in range(total):
         question = questions[i]
         answer = answers[i]
