@@ -43,6 +43,9 @@ def normalize_answer(s):
 def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
     test_data = dataset["test"]
+    # Print the number of test examples
+    num_test_examples = len(test_data)
+    print(f"Number of test examples: {num_test_examples}")
     return test_data
 
 
@@ -65,38 +68,33 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # annotated_formula: a string feature.
     # linear_formula: a string feature.
     # category: a string feature.
-    for example in test_data:
-        # Extract the relevant fields from the test data
-        question = example["Problem"]
-        answers = example["options"]
-        correct = example["correct"]
-        # Use the passed fields if provided, otherwise default to None
-        
-        rationale = example["rationale"]
-        options = example["options"]  # Assuming options is a list
-        correct_answer = example["correct"]
-        annotated_formula = example["annotated_formula"]
-        linear_formula = example["linear_formula"]
-        category = example["category"]
-        answer = normalize_answer(example["correct"])
+    for i in range(num_test_examples):
+        question = questions[i]
+        answer = answers[i]
+        correct_option = correct[1]
+        print(f"Question {i+1}: {question}")
+        print(f"  Answer: {answer}")
+        print(f"  Correct Answer: {correct_option}")
 
         start_time = time.time()
-
-        # Run the agent on the question
-        predicted_answer = agent.run(question, options)
-
+        # Call the LLM to get the answer
+        predicted_answer = call_llm(question + answer)
         end_time = time.time()
         latency = end_time - start_time
         total_time += latency
-
         predicted_answer = normalize_answer(predicted_answer)
-
+        # Compare the predicted answer with the correct answer
+        if predicted_answer == correct_option:
+            print(f"Question {i+1}: Correct")
+            correct_count += 1
+        else:
+            print(f"Question {i+1}: Incorrect")
+            print(f"  Question: {question}")
+            print(f"  Correct Answer: {correct_option}")
+            print(f"  Predicted Answer: {predicted_answer}")
         # Count tokens
-        tokens = count_tokens(question + rationale + options + predicted_answer)
+        tokens = count_tokens(question + options + predicted_answer)
         total_tokens += tokens
-
-        if predicted_answer == correct_answer:
-            correct += 1
 
         # Log metrics
         logger.info(f"Problem: {question}")
@@ -107,7 +105,8 @@ def evaluate_model_on_math(agent: Agent, test_data):
         logger.info(f"Latency: {latency:.2f} seconds")
         logger.info(f"Tokens: {tokens}")
 
-    accuracy = correct / total
+ 
+    accuracy = correct_count / total
     avg_latency = total_time / total
     avg_tokens = total_tokens / total
 
