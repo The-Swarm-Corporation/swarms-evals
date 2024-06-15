@@ -43,8 +43,8 @@ def normalize_answer(s):
 def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
     test_data = dataset["test"]
-
     return test_data
+
 
 # Tokenizer for counting tokens
 def count_tokens(text: str = None):
@@ -58,8 +58,6 @@ def evaluate_model_on_math(agent: Agent, test_data):
     total = len(test_data)
     total_tokens = 0
     total_time = 0
-
-
     # Problem: a string feature.
     # Rationale: a string feature.
     # options: a string feature.
@@ -85,7 +83,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
         start_time = time.time()
 
         # Run the agent on the question
-        predicted_answer = agent.run(question,rationale, options)
+        predicted_answer = agent.run(question, options)
 
         end_time = time.time()
         latency = end_time - start_time
@@ -102,7 +100,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
 
         # Log metrics
         logger.info(f"Problem: {question}")
-        logger.info(f"Rationale: {rationale}")
+        logger.info(f"Rationale: {Rationale}")
         logger.info(f"Options: {options}")
         logger.info(f"Predicted Answer: {predicted_answer}")
         logger.info(f"Correct Answer: {correct_answer}")

@@ -40,6 +40,7 @@ MATH_PROMPT = """
    - Distance traveled: 60 miles
    - Time taken: 1.5 hours
    - Question: Find the average speed (miles per hour).
+   - Possible answers a ) 30 b) 40 c) 50 d) 60
 
 2. **Plan Your Solution:**
    - To find the average speed, use the formula: speed = distance / time.
@@ -58,7 +59,7 @@ MATH_PROMPT = """
    - Units check: miles per hour
 
 6. **Present the Answer:**
-   - The car's average speed is 40 miles per hour.
+   - 40
 
 
 """
