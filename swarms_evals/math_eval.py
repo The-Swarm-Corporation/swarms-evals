@@ -106,7 +106,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
         logger.info(f"Rationale: {rationale}")
         logger.info(f"Options: {answer}")
         logger.info(f"Predicted Answer: {predicted_answer}")
-        logger.info(f"Correct Answer: {correct_answer}")
+        logger.info(f"Correct Answer: {correct_option}")
         logger.info(f"Latency: {latency:.2f} seconds")
         logger.info(f"Tokens: {tokens}")
 
