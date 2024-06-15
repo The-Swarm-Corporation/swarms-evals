@@ -81,7 +81,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
 
         start_time = time.time()
         # Call the LLM to get the answer
-        predicted_answer = call_llm(question + answer)
+        predicted_answer = agent.run(question + answer)
         end_time = time.time()
         latency = end_time - start_time
         total_time += latency
