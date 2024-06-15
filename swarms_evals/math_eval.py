@@ -96,7 +96,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
             print(f"  Correct Answer: {correct_option}")
             print(f"  Predicted Answer: {predicted_answer}")
         # Count tokens
-        tokens = count_tokens(question + options + predicted_answer)
+        tokens = count_tokens(question + answer + predicted_answer)
         total_tokens += tokens
 
         # Log metrics
