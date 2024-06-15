@@ -69,10 +69,12 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # category: a string feature.
     # Extract the relevant fields from the test data
     questions = test_data["Problem"]
+    rationales = test_data["Rationale"]
     answers = test_data["options"]
     correct = test_data["correct"]
     for i in range(total):
         question = questions[i]
+        rationale = rationales[i]
         answer = answers[i]
         correct_option = correct[1]
         print(f"Question {i+1}: {question}")
@@ -101,7 +103,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
 
         # Log metrics
         logger.info(f"Problem: {question}")
-        logger.info(f"Rationale: {Rationale}")
+        logger.info(f"Rationale: {rationale}")
         logger.info(f"Options: {options}")
         logger.info(f"Predicted Answer: {predicted_answer}")
         logger.info(f"Correct Answer: {correct_answer}")
