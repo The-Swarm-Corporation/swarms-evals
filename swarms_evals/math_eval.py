@@ -1,7 +1,6 @@
 import os
 import re
 import time
-import json
 
 import tiktoken
 from datasets import load_dataset
@@ -44,11 +43,8 @@ def normalize_answer(s):
 def load_math_dataset():
     dataset = load_dataset("allenai/math_qa", "main", "trust_remote_code=True")
     test_data = dataset["test"]
-    # Convert the DatasetDict to a list of dictionaries
-    # Each dictionary represents one example in the dataset
-    test_data_list = [example for example in test_data]
-    return test_data_list
 
+    return test_data
 
 # Tokenizer for counting tokens
 def count_tokens(text: str = None):
@@ -62,7 +58,8 @@ def evaluate_model_on_math(agent: Agent, test_data):
     total = len(test_data)
     total_tokens = 0
     total_time = 0
-    print(test_data._info)
+
+
     # Problem: a string feature.
     # Rationale: a string feature.
     # options: a string feature.
@@ -71,8 +68,12 @@ def evaluate_model_on_math(agent: Agent, test_data):
     # linear_formula: a string feature.
     # category: a string feature.
     for example in test_data:
+        # Extract the relevant fields from the test data
+        question = example["Problem"]
+        answers = example["options"]
+        correct = example["correct"]
         # Use the passed fields if provided, otherwise default to None
-        problem = example["problem"]
+        
         rationale = example["rationale"]
         options = example["options"]  # Assuming options is a list
         correct_answer = example["correct"]
@@ -84,7 +85,7 @@ def evaluate_model_on_math(agent: Agent, test_data):
         start_time = time.time()
 
         # Run the agent on the question
-        predicted_answer = agent.run(problem,rationale, options)
+        predicted_answer = agent.run(question,rationale, options)
 
         end_time = time.time()
         latency = end_time - start_time
@@ -93,14 +94,14 @@ def evaluate_model_on_math(agent: Agent, test_data):
         predicted_answer = normalize_answer(predicted_answer)
 
         # Count tokens
-        tokens = count_tokens(problem + rationale + options + predicted_answer)
+        tokens = count_tokens(question + rationale + options + predicted_answer)
         total_tokens += tokens
 
         if predicted_answer == correct_answer:
             correct += 1
 
         # Log metrics
-        logger.info(f"Problem: {problem}")
+        logger.info(f"Problem: {question}")
         logger.info(f"Rationale: {rationale}")
         logger.info(f"Options: {options}")
         logger.info(f"Predicted Answer: {predicted_answer}")
