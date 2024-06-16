@@ -51,6 +51,31 @@ def normalize_answer(s):
 
 # Load MMLU dataset
 def load_mmlu_dataset():
+    # You need to specify the tasks to download:
+    #  ['abstract_algebra', 'anatomy', 'astronomy', 
+    # 'business_ethics', 'clinical_knowledge', 
+    # 'college_biology', 'college_chemistry', 
+    # 'college_computer_science', 'college_mathematics', 
+    # 'college_medicine', 'college_physics', 'computer_security', 
+    # 'conceptual_physics', 'econometrics', 'electrical_engineering', 
+    # 'elementary_mathematics', 'formal_logic', 'global_facts', 
+    # 'high_school_biology', 'high_school_chemistry', 
+    # 'high_school_computer_science', 'high_school_european_history', 
+    # 'high_school_geography', 'high_school_government_and_politics', 
+    # 'high_school_macroeconomics', 'high_school_mathematics', 
+    # 'high_school_microeconomics', 'high_school_physics', 
+    # 'high_school_psychology', 'high_school_statistics', 
+    # 'high_school_us_history', 'high_school_world_history', 
+    # 'human_aging', 'human_sexuality', 'international_law', 
+    # 'jurisprudence', 'logical_fallacies', 'machine_learning', 
+    # 'management', 'marketing', 'medical_genetics', 
+    # 'miscellaneous', 'moral_disputes', 'moral_scenarios', 
+    # 'nutrition', 'philosophy', 'prehistory', 
+    # 'professional_accounting', 'professional_law', 
+    # 'professional_medicine', 'professional_psychology', 
+    # 'public_relations', 'security_studies', 'sociology', 
+    # 'us_foreign_policy', 'virology', 'world_religions']
+
     dataset = load_dataset("cais/mmlu", "all")
     test_data = dataset["test"]
     # Print the number of test examples
@@ -81,16 +106,16 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
     questions = test_data["question"]
     subjects = test_data["subject"]
     choices = test_data["choices"]
-    answer = test_data["answer"]
+    correct_answer = test_data["answer"]
     for i in range(total):
         question = questions[i]
         subject = subjects[i]
         choice = choices[i]
         choice_str = str(choice)
-        answer = answer[1]
+        answer = correct_answer
         print(f"Question {i+1}: {question}")
         print(f"  Answer: {choice}")
-        print(f"  Correct Answer: {answer}")
+        print(f"  Correct Answer: {correct_answer}")
 
         start_time = time.time()
         # Call the LLM to get the answer
@@ -100,13 +125,13 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
         total_time += latency
         predicted_answer = normalize_answer(predicted_answer)
         # Compare the predicted answer with the correct answer
-        if predicted_answer == answer:
+        if predicted_answer == correct_answer:
             print(f"Question {i+1}: Correct")
             correct += 1
         else:
             print(f"Question {i+1}: Incorrect")
             print(f"  Question: {question}")
-            print(f"  Correct Answer: {answer}")
+            print(f"  Correct Answer: {correct_answer}")
             print(f"  Predicted Answer: {predicted_answer}")
         # Count tokens
         tokens = count_tokens(question + choice_str + predicted_answer)
@@ -117,7 +142,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
         logger.info(f"Subject: {subject}")
         logger.info(f"Choices: {choice}")
         logger.info(f"Predicted Answer: {predicted_answer}")
-        logger.info(f"Correct Answer: {answer}")
+        logger.info(f"Correct Answer: {correct_answer}")
         logger.info(f"Latency: {latency:.2f} seconds")
         logger.info(f"Tokens: {tokens}")
 
