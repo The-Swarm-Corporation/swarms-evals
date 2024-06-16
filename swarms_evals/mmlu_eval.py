@@ -51,7 +51,7 @@ def normalize_answer(s):
 
 # Load MMLU dataset
 def load_mmlu_dataset():
-    dataset = load_dataset("cais/mmlu", "main", "trust_remote_code=True")
+    dataset = load_dataset("cais/mmlu")
     test_data = dataset["test"]
     # Print the number of test examples
 
