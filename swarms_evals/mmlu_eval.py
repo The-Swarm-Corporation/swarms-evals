@@ -84,7 +84,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
     answer = test_data["answer"]
     for i in range(total):
         question = questions[i]
-        subject = subjectss[i]
+        subject = subjects[i]
         choice = choices[i]
         answer = answer[1]
         print(f"Question {i+1}: {question}")
