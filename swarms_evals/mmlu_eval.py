@@ -112,7 +112,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
         subject = subjects[i]
         choice = choices[i]
         choice_str = str(choice)
-        answer = correct_answer[i][choice]
+        answer = choices[correct_answer[i]]
         print(f"Question {i+1}: {question}")
         print(f"  Answer: {choice}")
         print(f"  Correct Answer: {answer}")
