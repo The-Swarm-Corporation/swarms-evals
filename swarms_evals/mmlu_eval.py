@@ -16,7 +16,7 @@ import tiktoken
 from datasets import load_dataset
 from loguru import logger
 from swarms import Agent, OpenAIChat
-from swarms_evals.math_system import MMLU_PROMPT
+from swarms_evals.mmlu_system import MMLU_PROMPT
 from dotenv import load_dotenv
 
 
