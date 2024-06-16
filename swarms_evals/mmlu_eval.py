@@ -86,6 +86,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
         question = questions[i]
         subject = subjects[i]
         choice = choices[i]
+        choice_str = str(choice)
         answer = answer[1]
         print(f"Question {i+1}: {question}")
         print(f"  Answer: {choice}")
@@ -93,7 +94,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
 
         start_time = time.time()
         # Call the LLM to get the answer
-        predicted_answer = agent.run(question + choice)
+        predicted_answer = agent.run(question + choice_str)
         end_time = time.time()
         latency = end_time - start_time
         total_time += latency
@@ -108,7 +109,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
             print(f"  Correct Answer: {answer}")
             print(f"  Predicted Answer: {predicted_answer}")
         # Count tokens
-        tokens = count_tokens(question + choice + predicted_answer)
+        tokens = count_tokens(question + choice_str + predicted_answer)
         total_tokens += tokens
 
         # Log metrics
