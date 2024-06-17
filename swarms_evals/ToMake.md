@@ -92,7 +92,7 @@
 
 [ ] ChatBot Arena
 
-[ ] MT Bench
+[/] MT Bench
 
 
 
