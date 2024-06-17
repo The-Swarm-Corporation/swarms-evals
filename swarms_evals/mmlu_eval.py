@@ -143,7 +143,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
         logger.info(f"Subject: {subject}")
         logger.info(f"Choices: {choice}")
         logger.info(f"Predicted Answer: {predicted_answer}")
-        logger.info(f"Correct Answer: {answer}")
+        logger.info(f"Correct Choice: {answer}: {choice[answer]}")
         logger.info(f"Latency: {latency:.2f} seconds")
         logger.info(f"Tokens: {tokens}")
 
