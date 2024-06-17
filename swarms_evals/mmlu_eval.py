@@ -116,7 +116,7 @@ def evaluate_model_on_mmlu(agent: Agent, test_data):
         print(f"Question {i+1}: {question}")
         print(f"  Subject: {subject}")
         print(f"  Answer: {choice}")
-        print(f"  Correct Answer: {answer}")
+        print(f"  Correct Choice: {answer} {choice[ord(answer)]}")
 
         start_time = time.time()
         # Call the LLM to get the answer
