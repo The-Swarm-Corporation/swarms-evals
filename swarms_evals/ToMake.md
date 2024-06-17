@@ -68,7 +68,7 @@
 
 ## aggregated
 
-[/] MMLU [MMLU](https://en.wikipedia.org/wiki/MMLU) (https://arxiv.org/abs/2009.03300) (https://github.com/hendrycks/test) [Data] (https://people.eecs.berkeley.edu/~hendrycks/data.tar) [eval](https://github.com/hendrycks/test/blob/master/evaluate.py) [cite] ```@article{hendryckstest2021,
+[x] MMLU [MMLU](https://en.wikipedia.org/wiki/MMLU) (https://arxiv.org/abs/2009.03300) (https://github.com/hendrycks/test) [Data] (https://people.eecs.berkeley.edu/~hendrycks/data.tar) [eval](https://github.com/hendrycks/test/blob/master/evaluate.py) [cite] ```@article{hendryckstest2021,
   title={Measuring Massive Multitask Language Understanding},
   author={Dan Hendrycks and Collin Burns and Steven Basart and Andy Zou and Mantas Mazeika and Dawn Song and Jacob Steinhardt},
   journal={Proceedings of the International Conference on Learning Representations (ICLR)},
